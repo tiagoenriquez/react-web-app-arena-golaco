@@ -12,7 +12,6 @@ export default function Main () {
       <MainStyled>
         {openedForm === 'login' ?
           <LoginForm
-            loginClick={() => setOpenedForm('login')}
             registerClick={() => setOpenedForm('register')}
           />
         :

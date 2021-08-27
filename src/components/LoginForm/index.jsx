@@ -1,31 +1,49 @@
 import { useState, useEffect } from 'react';
+import { Redirect } from 'react-router';
 
 import Form from '../Form';
 import Input from '../Input';
 import Button from '../Button';
+import LoginProvider from '../../providers/loginProvider';
 
 import { Buttons } from './styles';
 
-export default function LoginForm({ loginClick, registerClick }) {
+export default function LoginForm({ registerClick }) {
 
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
   const [user, setUser] = useState({
     email: "",
-    password: ""
+    senha: ""
   });
+
+  const loginClick = () => {
+    setUser({
+      email: email,
+      senha: senha
+    });
+    console.log(user);
+    let logedUser = new LoginProvider(user);
+    if (logedUser.response.nome && logedUser.response.cpf && logedUser.response.telefone && logedUser.response.email && logedUser.response.senha) {
+      return <Redirect to='reserva/' />
+    }
+  }
+
+  useEffect(loginClick, [email, senha]);
 
   return (
     <div>
       <Form header="Login">
         <Input
           type="text"
-          value=""
-          onChange={(event) => setUser({ email: event.target.value })}
+          value={user.email}
+          onChange={(event) => setEmail(event.target.value )}
           placeholder="E-mail"
         />
         <Input
           type="password"
-          value=""
-          onChange={(event) => setUser({ password: event.target.value })}
+          value={user.senha}
+          onChange={(event) => setSenha( event.target.value )}
           placeholder="Senha"
         />
         <Buttons>
