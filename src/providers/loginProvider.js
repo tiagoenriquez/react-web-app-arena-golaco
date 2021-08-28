@@ -1,11 +1,11 @@
 import api from "../services/api";
 
-class LoginProvider {
+export default function LoginProvider ({logingUser}) {
 
-  constructor({ logingUser }) {
-    this.response = api.post('usuario/login', logingUser);
-  }
+  // const response = async (logingUser) => await api.post('usuario/login', logingUser);
+
+  const response = api.post('usuario/login', logingUser);
+
+  return response;
 
 }
-
-export default LoginProvider;

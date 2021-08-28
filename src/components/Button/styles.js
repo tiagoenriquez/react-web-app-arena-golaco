@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const ButtonStyled = styled.button`
   height: 40px;
-  width: 12vw;
+  width: 150px;
   background-color:  ${(props) => props.theme.colors.primary};
   color: white;
   : hover {

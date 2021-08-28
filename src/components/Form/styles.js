@@ -4,6 +4,6 @@ export const FormStyled = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
-  width: 30vw;
+  width: 400px;
   justify-content: center;
 `;

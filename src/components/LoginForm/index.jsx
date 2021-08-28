@@ -1,60 +1,68 @@
-import { useState, useEffect } from 'react';
-import { Redirect } from 'react-router';
+import { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import Form from '../Form';
+import ErrorMessageCard from '../ErrorMessageCard';
 import Input from '../Input';
 import Button from '../Button';
 import LoginProvider from '../../providers/loginProvider';
 
 import { Buttons } from './styles';
+import { setLogedUser } from '../../redux/modules/LogedUser';
 
 export default function LoginForm({ registerClick }) {
 
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [user, setUser] = useState({
-    email: "",
-    senha: ""
-  });
+  const [digitedEmail, setdigitedEmail] = useState("");
+  const [digitedPassword, setDigitedPassword] = useState("");
+  const [redirect, setRedirect] = useState(false);
+  const [invalid, setInvalid] = useState(false);
 
-  const loginClick = () => {
-    setUser({
-      email: email,
-      senha: senha
-    });
-    console.log(user);
-    let logedUser = new LoginProvider(user);
-    if (logedUser.response.nome && logedUser.response.cpf && logedUser.response.telefone && logedUser.response.email && logedUser.response.senha) {
-      return <Redirect to='reserva/' />
-    }
+  const dispatch = useDispatch();
+
+  const loginClick = async () => {
+    let logingUser = { email: digitedEmail, senha: digitedPassword };
+    try {
+      let response = await LoginProvider({logingUser});
+      console.log(response);
+      dispatch(setLogedUser(response));
+      setRedirect(true)
+    } catch (err) {
+      setInvalid(true);
+    };
   }
 
-  useEffect(loginClick, [email, senha]);
+  useEffect(() => console.log(redirect + " " + invalid), [redirect, invalid]);
 
   return (
-    <div>
-      <Form header="Login">
-        <Input
-          type="text"
-          value={user.email}
-          onChange={(event) => setEmail(event.target.value )}
-          placeholder="E-mail"
-        />
-        <Input
-          type="password"
-          value={user.senha}
-          onChange={(event) => setSenha( event.target.value )}
-          placeholder="Senha"
-        />
-        <Buttons>
-          <Button onClick={loginClick}>
-            Logar
-          </Button>
-          <Button onClick={registerClick}>
-            Cadastrar-se
-          </Button>
-        </Buttons>
-      </Form>
-    </div>
+    <>
+      {redirect ? <Redirect to='/reserva' />
+    :
+      <div>
+        <Form header="Login">
+          {invalid && <ErrorMessageCard>CREDENCIAIS INVÁLIDAS</ErrorMessageCard>}
+          <Input
+            type="email"
+            value={digitedEmail}
+            onChange={(event) => setdigitedEmail(event.target.value )}
+            placeholder="E-mail"
+          />
+          <Input
+            type="password"
+            value={digitedPassword}
+            onChange={(event) => setDigitedPassword( event.target.value )}
+            placeholder="Senha"
+          />
+          <Buttons>
+            <Button onClick={loginClick}>
+              Logar
+            </Button>
+            <Button onClick={registerClick}>
+              Cadastrar-se
+            </Button>
+          </Buttons>
+        </Form>
+      </div>}
+    </>
   );
 }
