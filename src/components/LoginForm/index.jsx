@@ -24,7 +24,6 @@ export default function LoginForm({ registerClick }) {
     let logingUser = { email: digitedEmail, senha: digitedPassword };
     try {
       let response = await LoginProvider({logingUser});
-      console.log(response);
       dispatch(setLogedUser(response));
       setRedirect(true)
     } catch (err) {
