@@ -9,13 +9,16 @@ export default function Main () {
   const [openedForm, setOpenedForm] = useState('login');
 
     return (
-      <MainStyled>
-        {openedForm === 'login' ?
+      <MainStyled>{
+        openedForm === 'login' ?
           <LoginForm
             registerClick={() => setOpenedForm('register')}
           />
         :
-          <UserRegistrationForm/>}
+          <UserRegistrationForm>
+            goToLogin={() => setOpenedForm('login')}
+          </UserRegistrationForm>
+        }
       </MainStyled>
     );
 }

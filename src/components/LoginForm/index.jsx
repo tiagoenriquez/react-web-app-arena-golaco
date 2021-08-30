@@ -5,10 +5,9 @@ import { useDispatch } from 'react-redux';
 import Form from '../Form';
 import ErrorMessageCard from '../ErrorMessageCard';
 import Input from '../Input';
-import Button from '../Button';
+import Buttons from '../Buttons';
 import LoginProvider from '../../providers/loginProvider';
 
-import { Buttons } from './styles';
 import { setLogedUser } from '../../redux/modules/LogedUser';
 
 export default function LoginForm({ registerClick }) {
@@ -52,14 +51,12 @@ export default function LoginForm({ registerClick }) {
             onChange={(event) => setDigitedPassword( event.target.value )}
             placeholder="Senha"
           />
-          <Buttons>
-            <Button onClick={loginClick}>
-              Logar
-            </Button>
-            <Button onClick={registerClick}>
-              Cadastrar-se
-            </Button>
-          </Buttons>
+          <Buttons
+            loginLabel="Logar"
+            registerLabel="Cadastrar-se"
+            loginClick={loginClick}
+            registerClick={registerClick}
+          />
         </Form>
       </div>}
     </>
