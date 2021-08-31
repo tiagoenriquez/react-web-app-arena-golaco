@@ -1,16 +1,46 @@
-import { useSelector } from 'react-redux';
+import { Component } from 'react';
+import { format } from 'date-fns';
 
-export default function ReservationsList() {
+import Form from '../Form';
+import DateSelector from '../DateSelector';
+import { ReservationsListProvider } from '../../providers/reservationProvider';
 
-  const { logedUser } = useSelector((state) => state.logedUser);
+export default class ReservationsList extends Component {
 
-  const mostrarUsuario = () => console.log(logedUser.data);
+  state = { reservationsList: [], };
 
-  return (
-    <>
-      <h1>Lista de Reservas</h1>
-      <button onClick={mostrarUsuario}>Clique aqui</button>
-    </>
-  );
+  async componentDidMount() {
+    const formattedDate = format(new Date(), 'yyyy-MM-dd%');
+    let response = await ReservationsListProvider({formattedDate});
+    this.setState({ reservationsList: response.data });
+  }
+
+  render() {
+
+    const { reservationsList } = this.state;
+
+    return (
+      <div>
+        <Form header='Horários Reservados'>
+          <DateSelector defaultValue={format(new Date(), 'yyyy-MM-dd')} />
+          <table>
+            <tr>
+              <td>Início</td>
+              <td>Fim</td>
+              <td>Usuário</td>
+            </tr>
+            {
+              reservationsList.map((reservation) =>
+                <tr key={reservation.inicio}>
+                  <td>{reservation.inicio.toString().substring(11, 19)}</td>
+                  <td>{reservation.fim.toString().substring(11, 19)}</td>
+                  <td>{reservation.usuario}</td>
+                </tr>
+            )}
+          </table>
+        </Form>
+      </div>
+    );
+  }
   
 }
