@@ -1,3 +1,3 @@
 export { default as Main } from './Main';
-export { default as Reservation } from './Reservation';
+export { default as ReservationManagement } from './ReservationManagement';
 export { default as NotFound } from './NotFound';

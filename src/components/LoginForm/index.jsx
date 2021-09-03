@@ -23,7 +23,7 @@ export default function LoginForm({ registerClick }) {
     let logingUser = { email: digitedEmail, senha: digitedPassword };
     try {
       let response = await LoginProvider({logingUser});
-      dispatch(setLogedUser(response));
+      dispatch(setLogedUser(response.data));
       setRedirect(true)
     } catch (err) {
       setInvalid(true);

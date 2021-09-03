@@ -1,15 +1,16 @@
-import { TextField } from '@material-ui/core';
+import { StyledLabelDate } from './styles';
+import { StyledDateSelector } from './styles';
 
-export default function DateSelector({ defaultValue }) {
+export default function DateSelector({ defaultValue, onChange, classes }) {
   return(
-    <TextField
-    id="date"
-    label="Escolha uma data"
-    type="date"
-    defaultValue={defaultValue}
-    InputLabelProps={{
-      shrink: true,
-    }}
-    />
+    <>
+      <StyledLabelDate>Escolha uma data</StyledLabelDate>
+      <StyledDateSelector
+        id="date"
+        type="date"
+        defaultValue={defaultValue}
+        onChange={onChange}
+      />
+    </>
   );
 }

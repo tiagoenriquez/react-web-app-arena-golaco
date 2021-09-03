@@ -1,5 +1,5 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Main, Reservation, NotFound } from '../pages';
+import { Main, ReservationManagement, NotFound } from '../pages';
 
 export default function Routes () {
   return (
@@ -9,7 +9,7 @@ export default function Routes () {
           <Main />
         </Route>
         <Route path='/reserva'>
-          <Reservation />
+          <ReservationManagement />
         </Route>
         <Route path='*'>
           <NotFound />

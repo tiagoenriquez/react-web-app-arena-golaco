@@ -1,5 +1,5 @@
 export const Types = {
-  SET_LOGEDSUSER: 'LOGEDUSER/SET_LOGEDUSER',
+  SET_LOGEDSUSER: 'datas/SET_LOGEDUSER',
 };
 
 const initialState = {
