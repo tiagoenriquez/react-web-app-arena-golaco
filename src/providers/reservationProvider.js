@@ -7,3 +7,11 @@ export function ReservationsListProvider ({ formattedDate }) {
   return response;
 
 }
+
+export function ReservationProvider ({ formattedDate }) {
+
+  // const response = api.post(``)
+
+  // return response;
+
+}
