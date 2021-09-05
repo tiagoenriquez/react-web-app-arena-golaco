@@ -6,4 +6,6 @@ export const FormStyled = styled.div`
   background-color: white;
   width: 400px;
   justify-content: center;
+  margin-bottom: 20px;
+  border: 1px solid ${(props) => props.theme.colors.primary};
 `;

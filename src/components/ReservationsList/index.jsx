@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 
 import Form from '../Form';
-import { DateSelector } from '../../components';
+import DateSelector from '../DateSelector';
 import Table from '../Table';
 import { ReservationsListProvider } from '../../providers/reservationProvider';
 
@@ -24,6 +24,7 @@ export default function ReservationsList() {
   const listReservations = async (date) => {
     let formattedDate = date;
     let response = await ReservationsListProvider({formattedDate});
+    console.log(response);
     setReservationsList(response.data);
     dispatch(setReservedTimes({
       times: getReservedTimes(response.data),
