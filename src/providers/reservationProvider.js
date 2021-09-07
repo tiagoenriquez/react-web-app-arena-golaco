@@ -10,14 +10,12 @@ export function ReservationProvider ({ datas }) {
   return response;
 }
 
-export function ReservationsOfTheUserProvider ({ logedUser, start }) {
-  console.log(`logedUser: ${logedUser} - Start of the period: ${start}`);
-  const response = api.get(`reserva/usuario=${logedUser}&inicio=${start}`);
+export function ReservationsOfTheUserProvider ({ logedUser_id, start }) {
+  const response = api.get(`reserva/usuario=${logedUser_id}&inicio=${start}`);
   return response;
 }
 
 export function ReservationExclusionProvider ({ start }) {
-  console.log(start);
-  const response = api.delete('reserva', start);
+  const response = api.delete(`reserva/${start}`);
   return response;
 }

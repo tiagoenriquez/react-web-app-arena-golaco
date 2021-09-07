@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import Form from '../Form';
 import DateSelector from '../DateSelector';
 import Table from '../Table';
+import Row from '../Row';
 import { ReservationsListProvider } from '../../providers/reservationProvider';
 
 import { setReservedTimes } from '../../redux/modules/ReservedTimes';
@@ -13,6 +14,8 @@ export default function ReservationsList() {
 
   const dispatch = useDispatch();
 
+  const [formattedDate, setFormattedDate] = useState(format(new Date(), 'yyyy-MM-dd%'));
+  const [prevFormattedDate, setPrevFormattedDate] = useState('');
   const [reservationsList, setReservationsList] = useState([]);
 
   function getReservedTimes(datas) {
@@ -21,20 +24,26 @@ export default function ReservationsList() {
     })
   }
 
-  const listReservations = async (date) => {
-    let formattedDate = date;
-    let response = await ReservationsListProvider({formattedDate});
-    console.log(response);
-    setReservationsList(response.data);
-    dispatch(setReservedTimes({
-      times: getReservedTimes(response.data),
-      date: date.replace('%', '')
-    }));
+  async function listReservations () {
+    if (formattedDate !== prevFormattedDate) {
+      let response = await ReservationsListProvider({ formattedDate });
+      console.log(response);
+      setPrevFormattedDate(formattedDate);
+      setReservationsList(response.data);
+      dispatch(setReservedTimes({
+        times: getReservedTimes(response.data),
+        date: formattedDate.replace('%', '')
+      }))
+    };
   }
 
   useEffect(() => {
     async function list() {
-      await listReservations;
+      try{
+        await listReservations();
+      } catch (err) {
+        console.log(err);
+      }
     }
     list();
   });
@@ -43,12 +52,7 @@ export default function ReservationsList() {
     let day = event.target.value.substring(8, 10);
     let month = event.target.value.substring(5, 7);
     let year = event.target.value.substring(0, 4);
-    let date = `${year}-${month}-${day}%`
-    try{
-      listReservations(date)
-    } catch (err) {
-      console.log(err);
-    };
+    setFormattedDate(`${year}-${month}-${day}%`);
   }
 
   return (
@@ -62,9 +66,9 @@ export default function ReservationsList() {
           {
             reservationsList.map((reservation) =>
               <tr key={reservation.inicio}>
-                <td>{reservation.inicio.toString().substring(11, 19)}</td>
-                <td>{reservation.fim.toString().substring(11, 19)}</td>
-                <td>{reservation.usuario}</td>
+                <Row>{reservation.inicio.toString().substring(11, 19)}</Row>
+                <Row>{reservation.fim.toString().substring(11, 19)}</Row>
+                <Row>{reservation.usuario}</Row>
               </tr>
             )
           }

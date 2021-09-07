@@ -4,8 +4,9 @@ import { format } from 'date-fns';
 
 import Form from '../Form';
 import SuccessMessageCard from '../SuccessMessageCard';
-import { Label } from '../ReservationsList/styles';
+import Label from '../Label';
 import Table from '../Table';
+import Row from '../Row';
 import { ReservationProvider } from '../../providers/reservationProvider';
 
 export default function Reservation() {
@@ -48,10 +49,10 @@ export default function Reservation() {
 
     <Form header="Reserve um horário">
       <Label>
-          Data: {`${reservedTimes.date.substring(8, 10)}/${reservedTimes.date.substring(5, 7)}/${reservedTimes.date.substring(0, 4)}`}
+          <b>Data:</b> {`${reservedTimes.date.substring(8, 10)}/${reservedTimes.date.substring(5, 7)}/${reservedTimes.date.substring(0, 4)}`}
         </Label>
         <Label>
-          Usuario: {logedUser.nome}
+          <b>Usuario:</b> {logedUser.nome}
       </Label>
       {reservedTimes.date >= today ?
         <>
@@ -64,9 +65,9 @@ export default function Reservation() {
                     reservedTimes.date > today ||
                     parseInt(possibleTime.time.substring(0, 2)) > parseInt(now.substring(0, 2)) ?
                       <>
-                        <td>
+                        <Row>
                           <div onClick={() => reserve(possibleTime.time)}>{possibleTime.time}</div>
-                        </td>
+                        </Row>
                       </>
                     : null
                   }

@@ -1,6 +1,5 @@
-import { ReservationsList } from '../../components';
-import { Reservation } from '../../components';
-import { ReservationExclusion } from '../../components';
+
+import { Menu, ReservationsList, Reservation, ReservationExclusion } from '../../components';
 
 import { StyledReservationManagement } from './styles';
 
@@ -8,9 +7,10 @@ export default function ReservationManagement () {
 
   return (
     <StyledReservationManagement>
-      <ReservationsList />
-      <Reservation />
-      <ReservationExclusion />
+      <Menu />
+      <ReservationsList id='lista-de-reserva' />
+      <Reservation id='reserve-um-horario' />
+      <ReservationExclusion id='desistir-de-reserva' />
     </StyledReservationManagement>
   );
 }
