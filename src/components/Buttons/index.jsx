@@ -1,5 +1,5 @@
+import PropTypes from 'prop-types';
 import Button from '../Button';
-
 import { ButtonsStyles } from './styles';
 
 export default function Buttons({ loginLabel, registerLabel, loginClick, registerClick }) {
@@ -13,4 +13,11 @@ export default function Buttons({ loginLabel, registerLabel, loginClick, registe
       </Button>
     </ButtonsStyles>
   );
+}
+
+Buttons.propTypes = {
+  loginLabel: PropTypes.string.isRequired,
+  registerLabel: PropTypes.string.isRequired,
+  loginClick: PropTypes.func.isRequired,
+  registerClick: PropTypes.func.isRequired
 }

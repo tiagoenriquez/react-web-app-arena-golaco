@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { format } from 'date-fns';
 
 import Form from '../Form';
@@ -9,12 +9,16 @@ import Table from '../Table';
 import Row from '../Row';
 import { ReservationProvider } from '../../providers/reservationProvider';
 
-export default function Reservation() {
+import { setATimeWasReserved } from '../../redux/modules/ATimeWasReserved';
+
+export default function Reservation({ link }) {
 
   const [possibleTimes, setPossibleTimes] = useState([]);
   const [timeWasReserved, setTimeWasReserved] = useState(false);
   const { logedUser } = useSelector((state) => state.logedUser);
   const { reservedTimes } = useSelector((state) => state.reservedTimes);
+
+  const dispatch = useDispatch();
 
   const today = format(new Date(), 'yyyy-MM-dd');
   const now = format(new Date(), 'HH:mm:ss');
@@ -38,47 +42,50 @@ export default function Reservation() {
         usuario_id: logedUser.id
       };
       let response = await ReservationProvider({datas});
-      console.log(response);
+      console.log(response.status);
       setTimeWasReserved(true);
+      dispatch(setATimeWasReserved(true));
     } catch (err) {
-      console.log(err);
+      console.log(err.status);
     }
   }
 
   return (
 
-    <Form header="Reserve um horário">
-      <Label>
-          <b>Data:</b> {`${reservedTimes.date.substring(8, 10)}/${reservedTimes.date.substring(5, 7)}/${reservedTimes.date.substring(0, 4)}`}
-        </Label>
+    <div link={link}>
+      <Form header="Reserve um horário">
         <Label>
-          <b>Usuario:</b> {logedUser.nome}
-      </Label>
-      {reservedTimes.date >= today ?
-        <>
-          {timeWasReserved && <SuccessMessageCard>RESERVADO COM SUCESSO</SuccessMessageCard>}
-          <Table titles={[{name: 'Horários disponíveis'}]}>
-            {
-              possibleTimes.map((possibleTime) =>
-                <tr key={possibleTime.time}>
-                  {
-                    reservedTimes.date > today ||
-                    parseInt(possibleTime.time.substring(0, 2)) > parseInt(now.substring(0, 2)) ?
-                      <>
-                        <Row>
-                          <div onClick={() => reserve(possibleTime.time)}>{possibleTime.time}</div>
-                        </Row>
-                      </>
-                    : null
-                  }
-                </tr>
-              )
-            }
-          </Table>
-        </>
-      :
-        <Label>Data passada</Label>}  
-    </Form>
+            <b>Data:</b> {`${reservedTimes.date.substring(8, 10)}/${reservedTimes.date.substring(5, 7)}/${reservedTimes.date.substring(0, 4)}`}
+          </Label>
+          <Label>
+            <b>Usuario:</b> {logedUser.nome}
+        </Label>
+        {reservedTimes.date >= today ?
+          <>
+            {timeWasReserved && <SuccessMessageCard>RESERVADO COM SUCESSO</SuccessMessageCard>}
+            <Table titles={[{name: 'Horários disponíveis'}]}>
+              {
+                possibleTimes.map((possibleTime) =>
+                  <tr key={possibleTime.time}>
+                    {
+                      reservedTimes.date > today ||
+                      parseInt(possibleTime.time.substring(0, 2)) > parseInt(now.substring(0, 2)) ?
+                        <>
+                          <Row>
+                            <div onClick={() => reserve(possibleTime.time)}>{possibleTime.time}</div>
+                          </Row>
+                        </>
+                      : null
+                    }
+                  </tr>
+                )
+              }
+            </Table>
+          </>
+        :
+          <Label>Data passada</Label>}  
+      </Form>
+    </div>
   );
   
 }

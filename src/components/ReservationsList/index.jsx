@@ -10,7 +10,7 @@ import { ReservationsListProvider } from '../../providers/reservationProvider';
 
 import { setReservedTimes } from '../../redux/modules/ReservedTimes';
 
-export default function ReservationsList() {
+export default function ReservationsList({ link }) {
 
   const dispatch = useDispatch();
 
@@ -27,7 +27,7 @@ export default function ReservationsList() {
   async function listReservations () {
     if (formattedDate !== prevFormattedDate) {
       let response = await ReservationsListProvider({ formattedDate });
-      console.log(response);
+      console.log(response.status);
       setPrevFormattedDate(formattedDate);
       setReservationsList(response.data);
       dispatch(setReservedTimes({
@@ -42,7 +42,7 @@ export default function ReservationsList() {
       try{
         await listReservations();
       } catch (err) {
-        console.log(err);
+        console.log(err.status);
       }
     }
     list();
@@ -56,7 +56,7 @@ export default function ReservationsList() {
   }
 
   return (
-    <div>
+    <div link={link}>
       <Form header='Horários Reservados'>
         <DateSelector
           defaultValue={format(new Date(), 'yyyy-MM-dd')}

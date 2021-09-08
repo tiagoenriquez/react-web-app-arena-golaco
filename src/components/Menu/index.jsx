@@ -1,24 +1,39 @@
-import Button from '../Button';
+import PropTypes from 'prop-types';
 
+import { useDispatch } from 'react-redux';
+
+import Button from '../Button';
 import { StyledMenu, StyledLink } from './styles';
 
-export default function Menu() {
+import { setLogedUser } from '../../redux/modules/LogedUser';
+
+export default function Menu({ links }) {
+  
+  const dispatch = useDispatch();
+
+  function logout() {
+    dispatch(setLogedUser(null));
+  }
 
   return (
     <StyledMenu>
-      <StyledMenu>
-        <StyledLink href='#lista-de-reservas'>
-          Lista de Reservas
-        </StyledLink>
-        <StyledLink href='#reserve-um-horario'>
-          Reserve um horário
-        </StyledLink>
-        <StyledLink href='#desistir-de-reserva'>
-          Desistir de reserva
-        </StyledLink>
-      </StyledMenu>
-      <Button>Sair</Button>
+      <StyledLink href={links[0]}>
+        Lista de Reservas
+      </StyledLink>
+      <StyledLink href={links[1]}>
+        Reserve um horário
+      </StyledLink>
+      <StyledLink href={links[2]}>
+        Desistir de reserva
+      </StyledLink>
+      <Button onClick={logout}>
+        Sair
+      </Button>
     </StyledMenu>
   );
 
+}
+
+Menu.propTypes = {
+  links: PropTypes.array
 }

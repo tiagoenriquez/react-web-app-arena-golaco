@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-import { LoginForm } from '../../components'
-import { UserRegistrationForm } from '../../components'
+import { LoginForm, UserRegistrationForm } from '../../components';
 import { MainStyled } from './styles';
 
 export default function Main () {

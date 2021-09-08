@@ -1,7 +1,9 @@
+import PropTypes from 'prop-types';
+
 import { StyledLabelDate } from './styles';
 import { StyledDateSelector } from './styles';
 
-export default function DateSelector({ defaultValue, onChange, classes }) {
+export default function DateSelector({ defaultValue, onChange }) {
   return(
     <>
       <StyledLabelDate>Escolha uma data</StyledLabelDate>
@@ -13,4 +15,9 @@ export default function DateSelector({ defaultValue, onChange, classes }) {
       />
     </>
   );
+}
+
+DateSelector.propTypes = {
+  defaultValue: PropTypes.string.isRequired,
+  onChange: PropTypes.func
 }

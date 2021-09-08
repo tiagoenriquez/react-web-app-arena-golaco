@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -30,7 +31,7 @@ export default function LoginForm({ registerClick }) {
     };
   }
 
-  useEffect(() => console.log(redirect + " " + invalid), [redirect, invalid]);
+  useEffect(() => console.log('LoginForm'), [redirect, invalid]);
 
   return (
     <>
@@ -61,4 +62,8 @@ export default function LoginForm({ registerClick }) {
       </div>}
     </>
   );
+}
+
+LoginForm.propTypes = {
+  registerClick: PropTypes.func.isRequired
 }
