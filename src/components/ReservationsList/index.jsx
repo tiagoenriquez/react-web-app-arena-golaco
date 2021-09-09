@@ -10,7 +10,7 @@ import { ReservationsListProvider } from '../../providers/reservationProvider';
 
 import { setReservedTimes } from '../../redux/modules/ReservedTimes';
 
-export default function ReservationsList({ link }) {
+export default function ReservationsList({ id }) {
 
   const dispatch = useDispatch();
 
@@ -56,7 +56,7 @@ export default function ReservationsList({ link }) {
   }
 
   return (
-    <div link={link}>
+    <div id={id}>
       <Form header='Horários Reservados'>
         <DateSelector
           defaultValue={format(new Date(), 'yyyy-MM-dd')}

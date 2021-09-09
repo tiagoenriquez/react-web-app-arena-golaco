@@ -11,7 +11,7 @@ import { ReservationProvider } from '../../providers/reservationProvider';
 
 import { setATimeWasReserved } from '../../redux/modules/ATimeWasReserved';
 
-export default function Reservation({ link }) {
+export default function Reservation({ id }) {
 
   const [possibleTimes, setPossibleTimes] = useState([]);
   const [timeWasReserved, setTimeWasReserved] = useState(false);
@@ -52,7 +52,7 @@ export default function Reservation({ link }) {
 
   return (
 
-    <div link={link}>
+    <div id={id}>
       <Form header="Reserve um horário">
         <Label>
             <b>Data:</b> {`${reservedTimes.date.substring(8, 10)}/${reservedTimes.date.substring(5, 7)}/${reservedTimes.date.substring(0, 4)}`}

@@ -11,7 +11,7 @@ import { ReservationsOfTheUserProvider, ReservationExclusionProvider } from '../
 
 import { setATimeWasReserved } from '../../redux/modules/ATimeWasReserved';
 
-export default function ReservationExclusion({ link }) {
+export default function ReservationExclusion({ id }) {
 
   const [reservationsList, setReservationsList] = useState([]);
   const [prevLogedUser, setPrevLogedUser] = useState({});
@@ -55,7 +55,7 @@ export default function ReservationExclusion({ link }) {
   }
   
   return (
-    <div link={link}>
+    <div id={id}>
       <Form header='Desistir de Reserva'>
         {reservationDeleted && <SuccessMessageCard>RESERVA EXCLUÍDA</SuccessMessageCard>}
         <Label><b>Usuário: </b>{logedUser.nome}</Label>
