@@ -1,3 +1,9 @@
+# Arena Golaço
+
+Trata-se de um projeto que tinha sido feito com o Angular/Ionic para dispositivos móveis e que ganha uma versão para web com o React.
+
+Utiliza a API Arena Golaço, cujo repositório é https://github.com/tiagoenriquez/apiArenaGolaco e foi desenvolvida com o framework Laravel, em PHP.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
