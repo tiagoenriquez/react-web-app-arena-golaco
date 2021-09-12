@@ -5,11 +5,11 @@ Trata-se de um projeto que tinha sido feito com o Angular/Ionic para dispositivo
 Neste sistema um usuário pode se cadastrar e então logar no sistema da quadra de futebol fictícia Arena Golaço e então reservar horários para utilização da quadra.
 
 Contém duas rotas:
- -> '/': contem 2 formulários de login e cadastro de usuário
- -> '/reserva': contém 3 formulários:
-  -> Horários reservados: lista de horários reservados no dia escolhido pelo usuário. Quando a página é carregada, aparece a data atual
-  -> Reserve um horário: lista os horários passíveis de reserva na data escolhida e permite o cadastro da reserva com um clique sobre o horário
-  -> Desistir da reserva: lista os horários cadastrados pelo usuário logado e permite a desistência de reservar a quadra em um dos horários
+ * '/': contem 2 formulários de login e cadastro de usuário
+ * '/reserva': contém 3 formulários:
+  * Horários reservados: lista de horários reservados no dia escolhido pelo usuário. Quando a página é carregada, aparece a data atual
+  * Reserve um horário: lista os horários passíveis de reserva na data escolhida e permite o cadastro da reserva com um clique sobre o horário
+  * Desistir da reserva: lista os horários cadastrados pelo usuário logado e permite a desistência de reservar a quadra em um dos horários
 
 Utiliza a API Arena Golaço, cujo repositório é https://github.com/tiagoenriquez/apiArenaGolaco e foi desenvolvida com o framework Laravel, em PHP.
 
