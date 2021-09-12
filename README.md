@@ -11,7 +11,8 @@ Contém duas rotas:
     * Reserve um horário: lista os horários passíveis de reserva na data escolhida e permite o cadastro da reserva com um clique sobre o horário
     * Desistir da reserva: lista os horários cadastrados pelo usuário logado e permite a desistência de reservar a quadra em um dos horários
 
-Utiliza a API Arena Golaço, cujo repositório é https://github.com/tiagoenriquez/apiArenaGolaco e foi desenvolvida com o framework Laravel, em PHP.
+Utiliza a API Arena Golaço, cujo repositório é https://github.com/tiagoenriquez/apiArenaGolaco e foi desenvolvida com o framework Laravel, em PHP. 
+Para rodar a API, é preciso fazer o clone do projeto; instalar as dependências por meio do composer; criar um banco de dados Mysql com o nome setado no .env; e rodar as migrações da tabelas do banco de dados.
 
 # Getting Started with Create React App
 
